@@ -96,14 +96,15 @@ with rosbag.Bag('subsampled_velocitybag.bag', 'w') as outbag:
 			subsampled_odom_msg[1].pose.pose.orientation.y = average_pose.orientation.y
 			subsampled_odom_msg[1].pose.pose.orientation.z = average_pose.orientation.z
 			subsampled_odom_msg[1].pose.pose.orientation.w = average_pose.orientation.w
-			print subsampled_odom_msg[0]
-			print subsampled_odom_msg[1]			
+			#print subsampled_odom_msg[0]
+			#print subsampled_odom_msg[1]			
 			outbag.write(subsampled_odom_msg[0], subsampled_odom_msg[1], rospy.Time(average_t))
 			#Reset lists
 			average_t_list = []
 			average_pose_list = []
 			subsampled_odom_msg = ()
 			#Write tag_detection message
+			print msg
 			outbag.write(topic, msg, t)
 		elif topic == '/odom':
 			if len(subsampled_odom_msg) == 0:

@@ -52,7 +52,6 @@ add_message_files(
   FILES
   AprilTagDetection.msg
   AprilTagDetectionsArray.msg
-  EKFSlamInput.msg
 )
 
 ## Generate services in the 'srv' folder

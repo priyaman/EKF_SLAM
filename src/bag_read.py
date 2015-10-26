@@ -6,6 +6,8 @@ from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import Pose
 import numpy as np
+import sys
+import rospy
 
 class Custom_Point(Point):
 	def __init__(self, x, y, z):
@@ -76,18 +78,20 @@ class Pose_v2(Pose):
 
 	pass
 		
-
-bag = rosbag.Bag('velocitybag.bag')
+bagname = 'velocitybag.bag'
+bagname = sys.argv[1]
+bag = rosbag.Bag(bagname)
 average_odom = Odometry()
 odom_list = []
 count = 0
-for topic, msg,t  in bag.read_messages(topics=['/cmd_vel_mux/input/teleop']):
+max_time = 0
+min_time = float('inf')	
+for topic, msg,t  in bag.read_messages(topics=['/input','/odom','/tag_detections']):
 #for msg  in bag.read_messages(topics=['/odom']):
 #/cmd_vel_mux/input/teleop,'/mobile_base/events/bumper','/tag_detections', '/odom'
-	print str(t) + ":" + str(msg)
-	#odom_list.append(Custom_Point(msg.pose.pose.position.x,msg.pose.pose.position.y,msg.pose.pose.position.z))
-	#odom_list.append(Pose_v2(msg.pose.pose.position.x,msg.pose.pose.position.y,msg.pose.pose.position.z,msg.pose.pose.orientation.x,msg.pose.pose.orientation.y,msg.pose.pose.orientation.z, msg.pose.pose.orientation.w))
-	#print "-----------------------------------------"
+	print str(t.to_sec()) + ":" + str(topic)
+	#if topic == '/tag_detections':
+	print msg	
 
 bag.close()
 

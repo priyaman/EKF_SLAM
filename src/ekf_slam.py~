@@ -18,12 +18,10 @@ alpha_4 = 0.1
 alpha_5 = 0.1
 alpha_6 = 0.1
 
-#GLOBALS
-num_landmarks = 0
 
 #STATIC MATRICES
 #Fx s.t. x_t = Fx*y_t
-Fx_replacer = np.eye(3)
+Fx = np.matrix([[1.0,0.0,0.0,0.0,0.0,0.0],[0.0,1.0,0.0,0.0,0.0,0.0],[0.0,0.0,1.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0]])
 
 #sigma_thetha
 sigma_thetha = np.matrix([[0,0,0],[0,0,0],[0,0,normal(0.0, alpha_5) + normal(0.0, alpha_6)]])
